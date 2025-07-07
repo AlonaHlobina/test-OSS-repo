@@ -810,7 +810,7 @@ class SchemaMetadataTests(BasicSegregatedKeyspaceUnitTestCase):
                 raise unittest.SkipTest("Protocol versions 1 and 2 are not supported in Cassandra version ".format(CASSANDRA_VERSION))
 
         for protocol_version in (1, 2):
-            cluster = TestCluster()
+            cluster = TestCluster(protocol_version=protocol_version)
             session = cluster.connect()
             self.assertEqual(cluster.metadata.keyspaces[self.keyspace_name].user_types, {})
 
