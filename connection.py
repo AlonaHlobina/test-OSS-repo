@@ -1544,6 +1544,8 @@ class ResponseWaiter(object):
         """
         self.event.wait(timeout)
         if self.error:
+            if self.error is None:
+                raise RuntimeError("An unknown error occurred, but no specific exception was set.")
             raise self.error
         elif not self.event.is_set():
             raise OperationTimedOut()
